@@ -7,7 +7,7 @@ var getTime = function(){
 
 
 function TankPLayer(){
-    this.x = 0;
+    this.x = 0; 
 	this.y = 0;
 	this.vx = 0;
 	this.vy = 0;
@@ -21,53 +21,44 @@ function TankPLayer(){
     this.height = 50;
    // this.rotationAngle = Math.PI/180 * this.angle;
    // this.rotate = false;
-    
-    this.update = function(dt){
-        //this.y -= 0.1;
-        if(keyChecker.keyStatus.up){
-            //this.y -=0.5;
-            console.log("pressing w");
-            this.mod = 1;
-       /*  this.v += this.stats.acc;
-		    if(this.v > this.stats.maxV)
-			this.v = this.stats.maxV; */
-            
-            
+    this.checkBounds = function(){ //function checks if the tank is within the map's bounds
+        if(this.x  < 25 || this.x > (width - 25)){
+            if ((this.x ) < 25){
+            this.x = 25 ;
+            }else {
+                this.x = width -25;
+            }
         }
-        if(keyChecker.keyStatus.down){
-            console.log("pressing s" + this.mod);
-           // this.y += 0.5;
+        if (this.y < 25 || this.y > (height -25)){
+            if(this.y <25){
+            this.y=25;
+            }else{
+                this.y = height -25;
+            }
+        };
+    };
+    this.update = function(dt){
+        if(keyChecker.keyStatus.up){ // check if w key is pressed
+            this.mod = 1;     
+        }
+        if(keyChecker.keyStatus.down){ //s key 
             this.mod = -1;
         }
-        if(keyChecker.keyStatus.right){//d-key
-
-            //this.x += 0.5;
+        if(keyChecker.keyStatus.right){//d-key    
             this.angle += 1;
         }
         if(keyChecker.keyStatus.left){//a-key
-            //this.x -=0.5;
             this.angle -= 1;
         }
-
-        //if(!(keyChecker.keyStatus.up || keyChecker.keyStatus.down)) {
-            //console.log("keycheker !");
-           // this.y += (this.speed * this.mod) * Math.sin(Math.PI / 180 * this.angle);
-            /* this.v *= 0.99;
-
-            this.vy = this.v * Math.sin(this.angle);
-            this.y += this.vy * dt; */
-           
-        //}
         if(keyChecker.keyStatus.up || keyChecker.keyStatus.down) {
-            console.log("keycheker wiuthoiut !");
             this.x += (this.speed*this.mod) * Math.cos(Math.PI/180 * (this.angle-90));
             this.y += (this.speed*this.mod) * Math.sin(Math.PI/180 * (this.angle-90));
-            //this.rotationAngle = Math.PI/180 * this.angle
+            console.log("this is x "+ this.x);
             this.mod = 0;
         }
 
         var time = getTime();
-        if(keyChecker.keyStatus.fire &&   //bullet shoot i think
+        if(keyChecker.keyStatus.fire &&   //bullet shoot
 			time - this.lastShootTime >= this.stats.shootDelayMs){
                 angleToRadian = Math.PI / 180 * this.angle;
 			bullets.push({
@@ -78,23 +69,14 @@ function TankPLayer(){
 			});
 			this.lastShootTime = time;
         }
-        
-    
+        this.checkBounds();// check if we're within bounds
     }
     
     this.render = function(ctx){
-       
-        //console.log(mouse.x);
-        //ctx.rotate(Math.PI / 180 * 50);
-        //ctx.drawImage(image, this.x ,this.y, 50,50);
         ctx.save()
         ctx.translate(this.x, this.y);
         ctx.rotate(Math.PI/180 * this.angle);
         ctx.drawImage(image, -(this.width/2), -(this.height/2), this.width, this.height); 
-        //ctx.drawImage(image, (this.x/2),(this.y/2));
         ctx.restore();
-        
-       
-        
     }
 }
