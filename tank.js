@@ -1,20 +1,22 @@
 var canvas,
 	ctx,
 	width,
-	height;
+    height,
+    camX;
 
     function init(){
 	
 	canvas = document.getElementById("canvas");
     ctx = canvas.getContext('2d');
     width = canvas.width;
-	height = canvas.height;
+    height = canvas.height;
+    camX = window.innerWidth/2;
     canvas.style.border = "1px solid black";
     window.onkeydown = keyChecker.keyDownListener;
 	window.onkeyup = keyChecker.keyUpListener;
 
 
-    tankPlayer.x = width/2;
+    tankPlayer.x = window.innerWidth /2;
     tankPlayer.y = height/2;
 
     
@@ -41,6 +43,7 @@ var canvas,
         renderBackground();
         tankPlayer.render(ctx);
         bullets.render(ctx);
+        NPObjects.render(ctx);
         
 
     }
