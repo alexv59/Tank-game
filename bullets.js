@@ -9,7 +9,7 @@ function Bullets(){
         bullet.vy = bullet.v * Math.sin(bullet.angle); //speed y 
     }
     this.push = function(bullet){
-		
+		// temp comment
         this.init(bullet);
         var id = -1;
 		//Search empty space
