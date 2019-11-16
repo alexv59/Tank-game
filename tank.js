@@ -5,7 +5,7 @@ var canvas,
     camX;
 
     function init(){
-	
+        
 	canvas = document.getElementById("canvas");
     ctx = canvas.getContext('2d');
     width = canvas.width;
@@ -13,31 +13,33 @@ var canvas,
     camX = window.innerWidth/2;
     canvas.style.border = "1px solid black";
     window.onkeydown = keyChecker.keyDownListener;
-	window.onkeyup = keyChecker.keyUpListener;
-
+    window.onkeyup = keyChecker.keyUpListener;
+    //console.log("aaa "+ window.scrollX);
+    
 
     tankPlayer.x = window.innerWidth /2;
     tankPlayer.y = height/2;
-
+    //comments
+    window.onbeforeunload = function () {
+        window.scrollTo(0, 0);
+      }
     
-//comments
-
 
     setInterval(function(){ 
         updateGame(0.01);
         renderGame();
         
-      
 
-       
-      
+        
     }, 10);
-
+    
 
 
     function updateGame(dt){
         bullets.update(dt);
+        NPObjects.update(dt);
         tankPlayer.update(dt);
+        
     }
     function renderGame(){
         renderBackground();
