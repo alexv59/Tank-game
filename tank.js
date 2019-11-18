@@ -14,21 +14,25 @@ var canvas,
     canvas.style.border = "1px solid black";
     window.onkeydown = keyChecker.keyDownListener;
     window.onkeyup = keyChecker.keyUpListener;
-    //console.log("aaa "+ window.scrollX);
-    
-
+    canvas1 = document.getElementById("minicanvas");
+    ctx1 = canvas1.getContext('2d');
+    w1=canvas1.width;
+    h1 = canvas1.height;
+    var img = new Image();
+    img.src='grass.png';
     tankPlayer.x = window.innerWidth /2;
     tankPlayer.y = height/2;
+    var counter = 0;
     //comments
-    window.onbeforeunload = function () {
-        window.scrollTo(0, 0);
-      }
+    
+      
     
 
     setInterval(function(){ 
         updateGame(0.01);
         renderGame();
-        
+        rBackground();
+
 
         
     }, 10);
@@ -50,9 +54,33 @@ var canvas,
 
     }
     function renderBackground(){
-        ctx.fillStyle = "#c6c6c6";
-        ctx.fillRect(0,0,width,height);
+        //ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+    //ctx.fillRect(0,0,width,height);
+     //var pattern = ctx1.createPattern(img, 'repeat');
+      //ctx.fillStyle = pattern;
+       //ctx.fillStyle = pattern;
+   //    ctx.drawImage(img,500,0);
+   ctx.clearRect(0,0,width,height);
+       //rBackground();
+   
+     
+       
 
     }
+
+    function rBackground(){
+        console.log("calling back");
+        
+        
+        if (counter < 1){
+            console.log(counter);
+        var pattern = ctx1.createPattern(img, 'repeat');
+        ctx1.fillStyle = pattern;
+        ctx1.fillRect(0, 0,width,height);
+        counter =1;
+        } 
+       
+    }
+    
     
 }

@@ -11,15 +11,13 @@ function TankPLayer(){
 	this.vx = 0; //his x velocity
 	this.vy = 0; //y velocity
     this.mod = 0; //new
-    this.speed = 2; 
+    this.speed = 3; 
 	this.angle = 0;
     this.lastShootTime = 0;
     this.shootDelayMs=600;
     //this.stats = {maxV:100,dAngle:0.03,acc:10,shootDelayMs:600};
     this.width = 50;
     this.height = 50;
-    this.camX1 = 960;
-    this.CamY;
 
     this.checkBounds = function(){ //function checks if the tank is within the map's bounds
         if(this.x  < 25 || this.x > (width - 25)){
@@ -52,7 +50,6 @@ function TankPLayer(){
             this.angle = (((this.angle-1) % 360) + 360) % 360;
         }
         if(keyChecker.keyStatus.up || keyChecker.keyStatus.down) {
-            window.scrollTo((this.x -window.innerWidth /2), (this.y - window.innerHeight /2)); //keps the user in the  center of the map so he doesn't run outside of the screen
             console.log("angle " + this.angle);
             this.x += (this.speed*this.mod) * Math.cos(Math.PI/180 * (this.angle-90));
             this.y += (this.speed*this.mod) * Math.sin(Math.PI/180 * (this.angle-90));
@@ -82,5 +79,7 @@ function TankPLayer(){
         ctx.rotate(Math.PI/180 * this.angle);
         ctx.drawImage(image, -(this.width/2), -(this.height/2), this.width, this.height); 
         ctx.restore();
+        window.scrollTo((this.x -window.innerWidth /2), (this.y - window.innerHeight /2)); //keps the user in the  center of the map so he doesn't run outside of the screen
+
     }
 }
