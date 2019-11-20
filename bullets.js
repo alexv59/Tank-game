@@ -5,19 +5,28 @@ function Bullets(){
     this.maxID=0;
 
     this.init = function(bullet){
-		bullet.vx = bullet.v * Math.cos(bullet.angle); //speed x i think
+		bullet.vx = bullet.v * Math.cos(bullet.angle); //speed x 
         bullet.vy = bullet.v * Math.sin(bullet.angle); //speed y 
     }
     this.push = function(bullet){
-		// temp comment
+		this.objects[0] = bullet;
+		// temp comment 
         this.init(bullet);
-        var id = -1;
+		var id = -1;
 		//Search empty space
-		while(this.objects[++id] != undefined);
+
+
+
+
+
+
+
+		 while(this.objects[++id] != undefined);
 		this.objects[id] = bullet;
 		if(id > this.maxID) this.maxID = id;
     };
     this.update = function(dt){
+		
 		for(var i = 0;i <= this.maxID;i++){
 			if(this.objects[i] == undefined) continue;
 			
@@ -44,7 +53,6 @@ function Bullets(){
 			ctx.beginPath();
 			ctx.arc(obj.x,obj.y,4,0,6.28);
 			ctx.fill();
-			//console.log(obj.y);
 		}
 	};
 }

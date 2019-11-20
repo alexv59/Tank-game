@@ -69,11 +69,7 @@ var canvas,
     }
 
     function rBackground(){
-        console.log("calling back");
-        
-        
         if (counter < 1){
-            console.log(counter);
         var pattern = ctx1.createPattern(img, 'repeat');
         ctx1.fillStyle = pattern;
         ctx1.fillRect(0, 0,width,height);

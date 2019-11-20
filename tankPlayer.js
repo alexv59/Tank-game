@@ -11,10 +11,10 @@ function TankPLayer(){
 	this.vx = 0; //his x velocity
 	this.vy = 0; //y velocity
     this.mod = 0; //new
-    this.speed = 3; 
+    this.speed = 1; 
 	this.angle = 0;
     this.lastShootTime = 0;
-    this.shootDelayMs=600;
+    this.shootDelayMs=1000;
     //this.stats = {maxV:100,dAngle:0.03,acc:10,shootDelayMs:600};
     this.width = 50;
     this.height = 50;
@@ -66,8 +66,9 @@ function TankPLayer(){
 				x:this.x,
 				y:this.y-5,
 				angle:angleToRadian-(Math.PI/2),
-				v:250
-			});
+                v:250
+                
+            });
 			this.lastShootTime = time;
         }
         this.checkBounds();// check if we're within bounds
