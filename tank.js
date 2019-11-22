@@ -29,7 +29,7 @@ var canvas,
     
 
     setInterval(function(){ 
-        updateGame(0.01);
+        updateGame(0.015);
         renderGame();
         rBackground();
 
