@@ -1,6 +1,6 @@
 Player.TURN_RATE = Math.PI / 45;
 Player.DEFAULT_VELOCITY = 4;
-Player.DEFAULT_SHOT_COOLDOWN = 800;
+Player.DEFAULT_SHOT_COOLDOWN = 600;
 Player.DEFAULT_HITBOX_SIZE = 20;
 Player.MAX_HEALTH = 10;
 Player.MINIMUM_RESPAWN_BUFFER = 10;
@@ -128,7 +128,7 @@ Player.prototype.isDead = function() {
 
 // damages the player
 Player.prototype.damage = function(amount) {
-	this.health -= amount;
+	this.health = this.health - amount;
 };
 
 // respawns if player is killed

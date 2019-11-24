@@ -66,6 +66,7 @@ Game.prototype.getObstacles = function() {
 // updates the state of all objects, checks for collision between objects and sends data to connected clients
 Game.prototype.update = function(io) {
 	var players = this.getPlayers();
+	var projectiles = this.getProjectiles();
 	for (var i = 0; i < players.length; ++i) {
 		players[i].update();
 		var obstacles = this.getObstacles();
@@ -82,6 +83,7 @@ Game.prototype.update = function(io) {
 				if (players[k].isCollidedWith(players[i].x, players[i].y, players[i].hitboxSize)){
 					players[i].damage(1);
 					players[i].orientation = -1 * players[i].orientation;
+					players[k].orientation = -1 * players[k].orientation;
 					if (players[i].isDead) {
 						players[i].respawn();
 					}
@@ -90,9 +92,18 @@ Game.prototype.update = function(io) {
 		}
 	}
   
-	for (var i = 0; i < this.projectiles.length; ++i) {
-		if (this.projectiles[i].shouldExist) {
-			this.projectiles[i].update(this.clients, this.obstacles, this.powerups);
+	for (var i = 0; i < projectiles.length; ++i) {
+		for (var k = 0; k < players.length; ++k) {
+			if (projectiles[i].firedBy != players[k].id && projectiles[i].isCollidedWith(players[k].x, players[k].y, players[k].hitboxSize)) {
+				players[k].damage(1);
+				if (players[k].isDead()) {
+					players[k].respawn();
+				}
+				projectiles[i].shouldExist = false;
+			}
+		}
+		if (projectiles[i].shouldExist) {
+			projectiles[i].update(this.clients, this.obstacles, this.powerups);
 		} else {
 			io.sockets.emit('update-projectiles', this.projectiles.splice(i, 1));
 			i--;
