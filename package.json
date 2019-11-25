@@ -13,6 +13,7 @@
   },
   "engines": {
     "node": "*"
+	"npm": "*"
   },
   "repository": {
     "type": "git",
