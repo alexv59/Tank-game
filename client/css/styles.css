@@ -74,16 +74,17 @@ body {
 	width: 200px;
 	margin: 0;
 	padding: 0;
+	color: #f542d1;
 }
 
 #leaderboard h3 {
-	color: #ffffff;
+	color: #f542d1;
 }
 
 #leaderboard li {
 	margin: 5px;
 	list-style-type: none;
-	background-color: #b9b9b9;
+	background-color: #f542d1;
 	border-radius: 5px;
 	color: #ffffff;
 }
