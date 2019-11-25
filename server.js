@@ -1,4 +1,4 @@
-var PORT_NUMBER = 5000;
+var PORT_NUMBER = process.env.PORT || 5000;
 var FRAME_RATE = 1000.0 / 60.0;
 
 var app = require('express')();
